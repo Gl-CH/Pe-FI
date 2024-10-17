@@ -1,6 +1,4 @@
-I can extract the following meaningful text in markdown from the provided content:
-
-**# Pefi - Personal Finance Management App**
+# Pefi - Personal Finance Management App**
 
 **Description:**
 
