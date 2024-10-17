@@ -1,4 +1,4 @@
-# Pefi - Personal Finance Management App**
+# Pefi - Personal Finance Management App
 
 **Description:**
 
@@ -38,23 +38,3 @@ Pefi is designed to be a hands-on learning tool. Here are some features you can 
 * Transaction History Logging: Track all transactions made in the app.
 * Password Protection: Add a layer of security by implementing user authentication.
 * Financial Analytics: Create features for budget tracking and goal setting.
-
-**About:**
-
-This is a beginner-friendly financial tracking app built with Python. It's designed to help you learn Python programming by implementing new features yourself.
-
-**Topics:**
-
-* gui
-* python3
-* learning-by-doing
-* practice-project
-* small-projects
-
-**Resources:**
-
-* Readme
-
-**Languages:**
-
-* Python (100.0%)
