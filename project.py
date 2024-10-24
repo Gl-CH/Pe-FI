@@ -2,13 +2,27 @@ import sys
 import tkinter as tk
 from re import match as regex_match
 from tkinter import messagebox
+from datetime import datetime as time
+
+
 
 
 class Account:
+    def log_it(func):
+        def wrapper(*args,**kwargs):
+            func(*args,**kwargs)
+            with open("transaction_history.txt","a") as file:
+                file.write(f"{str(func.__qualname__).split(".")[1].title()} at {str(time.now())}\n")
+        return wrapper
+    
     def __init__(self) -> None:
-     with open("old_bank_statement.txt","r") as file:
-        self._balance = int(file.read())
-
+        try:
+            with open("old_bank_statement.txt","r") as file:
+                self._balance = int(file.read())
+        except:
+            with open("old_bank_statement.txt","w") as file:
+                self._balance = 0
+                file.write("0")
 
     @property
     def balance(self):
@@ -20,20 +34,24 @@ class Account:
         if amount >= 0:
             self._balance = amount
     
-
+    @log_it
     def deposit(self,amount):
         if amount.isdigit():
             self._balance += int(amount) 
-            Popup(f"Balance is {self.balance}","Balance")
+            Popup(f"Done! Balance is {self.balance}","Balance")
         else:
-            print(amount)
+            Popup("Invalid Amount")
 
-
+    @log_it
     def widthdraw(self,amount):
         if amount.isdigit():
-            if int(amount) < self._balance:
+            if int(amount) <= self._balance:
                 self._balance -= int(amount)
-                Popup(f"Balance is {self.balance}","Balance")
+                Popup(f"Done! Balance is {self.balance}","Balance")
+            else:
+                Popup("Insufficent Funds")
+        else:
+            Popup("Invalid Amount")
 
 
 class Window:
@@ -89,7 +107,7 @@ account = Account()
 def main():   
     window = Window("pefi","240x480")
     window.add_label("Welcome to Pefi",('Roboto',18))
-    window.add_button("Check Balance",('Roboto',18),lambda:Popup(account.balance))
+    window.add_button("Check Balance",('Roboto',18),lambda:Popup(f"Balance is {account.balance}"))
     window.add_button("Deposit",('Roboto',18),deposit_window)
     window.add_button("Widthdraw",('Roboto',18),widthdraw_window)
     window.add_button("Close",('Roboto',18),close_window)
