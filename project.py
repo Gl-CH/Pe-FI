@@ -18,11 +18,11 @@ class App(ctk.CTk):
         self.account = Account()
 
         # Create buttons
-        self.button_frame = ctk.CTkFrame(self,corner_radius= 12,width= 250,height=300,border_width=0.5,fg_color="#1E1E1E")
-        self.balance_button = ctk.CTkButton(self.button_frame, text="Balance",corner_radius= 6,font=self.custom_font,height=self.button_height,width=self.button_width,command = self.balance_command)
-        self.withdraw_button = ctk.CTkButton(self.button_frame, text="Withdraw",corner_radius= 6,font=self.custom_font,height=self.button_height,width=self.button_width,command = self.widthdraw_command)
-        self.deposit_button = ctk.CTkButton(self.button_frame, text="Deposit",corner_radius=6,font= self.custom_font,height=self.button_height,width=self.button_width,command=self.deposit_command)
-        self.greeting = ctk.CTkLabel(self,text="Welcome to Pe-FI",font = ("Ariel",32,'bold'),fg_color="transparent", bg_color="transparent")
+        self.button_frame = ctk.CTkFrame(self,corner_radius= 24,width= 250,height=300,border_width=0.5,fg_color="#1E1E1E")
+        self.balance_button = ctk.CTkButton(self.button_frame, text="Balance",corner_radius= 42,font=self.custom_font,height=self.button_height,width=self.button_width,command = self.balance_command)
+        self.withdraw_button = ctk.CTkButton(self.button_frame, text="Withdraw",corner_radius= 42,font=self.custom_font,height=self.button_height,width=self.button_width,command = self.widthdraw_command)
+        self.deposit_button = ctk.CTkButton(self.button_frame, text="Deposit",corner_radius= 42,font= self.custom_font,height=self.button_height,width=self.button_width,command=self.deposit_command)
+        self.greeting = ctk.CTkLabel(self,text="Welcome to Pe-FI",font = ("Lato",32,'bold'),fg_color="transparent", bg_color="transparent")
         
         # Place buttons using pack
         self.balance_button.pack(pady = 10,anchor ="center")
@@ -32,51 +32,51 @@ class App(ctk.CTk):
         self.greeting.grid(row=0, column=0, columnspan=3, pady=5, sticky="NSEW")
 
     def balance_command(self):
-        self.input_frame = ctk.CTkFrame(self,corner_radius= 12,width= 250,height=300,border_width=0.45,fg_color="#1E1E1E")
+        self.input_frame = ctk.CTkFrame(self,corner_radius= 24,width= 250,height=300,border_width=0.45,fg_color="#1E1E1E")
         self.input_frame.place(relx= 0.51, rely=0.18, relwidth=0.5, relheight=1)
-        balance_text = ctk.CTkLabel(self.input_frame,text="Your Balance is",font = ("Ariel",24,'bold'),anchor= "center")
-        balance_num = ctk.CTkLabel(self.input_frame,text="$"+str(self.account.balance),font = ("Ariel",38,'bold'),anchor= "center")
-        recent_transactions_label = ctk.CTkLabel(self.input_frame,text="Recent Transactions",font = ("Ariel",18,'bold'),fg_color="transparent", bg_color="transparent")
+        balance_text = ctk.CTkLabel(self.input_frame,text="Your Balance is",font = ("Lato",22,'bold'),anchor= "w")
+        balance_num = ctk.CTkLabel(self.input_frame,text="$"+str(self.account.balance),font = ("Lato",38,'normal'),anchor= "center")
+        recent_transactions_label = ctk.CTkLabel(self.input_frame,text="Recent Transactions",font = ("Lato",22,'bold'),fg_color="transparent", bg_color="transparent")
         output = ""
         for entries in self.account.recent_transactions(5):
             transaction_type  ={"deposit":"Deposited","widthdraw":"Widthdrew"}
-            output += f"{transaction_type.get(entries[0])} {entries[1]}\n"
-        transactions = ctk.CTkLabel(self.input_frame,text= output,font = ("Ariel",10,'bold'),fg_color="transparent", bg_color="transparent")
+            output += f"{transaction_type.get(entries[0])} ${entries[1]}\n"
+        transactions = ctk.CTkLabel(self.input_frame,text= output,font = ("Lato",10,'normal'),fg_color="transparent", bg_color="transparent")
         balance_text.pack(pady = 3)
         balance_num.pack(pady=5)
-        recent_transactions_label.pack(pady=5)
+        recent_transactions_label.pack()
         transactions.pack(pady = 5)
                 
     
     def deposit_command(self):
         self.deposit_frame = ctk.CTkFrame(self,corner_radius= 12,width= 250,height=300,border_width=0.45,fg_color="#1E1E1E")
         self.deposit_frame.place(relx= 0.51, rely=0.18, relwidth=0.5, relheight=1)
-        deposit_text = ctk.CTkLabel(self.deposit_frame,text="Deposit How Much",font = ("Ariel",14,'bold'),anchor= "w",padx = 1)
+        deposit_text = ctk.CTkLabel(self.deposit_frame,text="Deposit How Much?",font = ("Lato",14,'bold'),anchor= "w",padx = 1)
         deposit_textbox = ctk.CTkEntry(self.deposit_frame)
-        enter_button = ctk.CTkButton(self.deposit_frame,text = "enter",command = lambda:deposit(deposit_textbox.get()))
+        enter_button = ctk.CTkButton(self.deposit_frame,text = "enter",command = lambda:deposit(deposit_textbox.get()),corner_radius =100)
         deposit_text.pack(pady=5,)
         deposit_textbox.pack(pady=5)
         enter_button.pack(pady =5)
         def deposit(amount):
             deposit_textbox.delete(0, 'end')
             status = self.account.deposit(amount)
-            status_text = ctk.CTkLabel(self.deposit_frame,text= status,font = ("Ariel",14,'bold'),anchor= "w",padx = 1)
+            status_text = ctk.CTkLabel(self.deposit_frame,text= status,font = ("Lato",14,'bold'),anchor= "w",padx = 1)
             status_text.pack(pady =5)
             self.after(1000,lambda:status_text.destroy())
 
     def widthdraw_command(self):
         self.widthdraw_frame = ctk.CTkFrame(self,corner_radius= 12,width= 250,height=300,border_width=0.45,fg_color="#1E1E1E")
         self.widthdraw_frame.place(relx= 0.51, rely=0.18, relwidth=0.5, relheight=1)
-        widthdraw_text = ctk.CTkLabel(self.widthdraw_frame,text="Widthdraw how much?",font = ("Ariel",14,'bold'),anchor= "center")
+        widthdraw_text = ctk.CTkLabel(self.widthdraw_frame,text="Widthdraw how much?",font = ("Lato",14,'bold'),anchor= "center")
         widthdraw_textbox = ctk.CTkEntry(self.widthdraw_frame,)
-        enter_button = ctk.CTkButton(self.widthdraw_frame,text = "enter",command = lambda:widthdraw(widthdraw_textbox.get()))
+        enter_button = ctk.CTkButton(self.widthdraw_frame,text = "enter",command = lambda:widthdraw(widthdraw_textbox.get()),corner_radius =100)
         widthdraw_text.pack(pady =5)
         widthdraw_textbox.pack(pady =5)
         enter_button.pack(pady =5)
         def widthdraw(amount):
             widthdraw_textbox.delete(0, 'end')
             status = self.account.widthdraw(amount)
-            status_text = ctk.CTkLabel(self.widthdraw_frame,text= status,font = ("Ariel",14,'bold'),anchor= "w",padx = 1)
+            status_text = ctk.CTkLabel(self.widthdraw_frame,text= status,font = ("Lato",14,'bold'),anchor= "w",padx = 1)
             status_text.pack(pady =5)
             self.after(1000,lambda:status_text.destroy())
 
