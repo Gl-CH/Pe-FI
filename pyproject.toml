@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pe-fi"
+version = "0.1"
+description = "Person finance tracker"
+authors = ["Tobi <stdio11games@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+customtkinter = "^5.2.2"
+pytweening = "^1.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
