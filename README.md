@@ -1,4 +1,4 @@
-# Pefi - Personal Finance Management App**
+# Pefi - Personal Finance Management App
 
 **Description:**
 
