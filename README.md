@@ -6,7 +6,7 @@ Pefi is a beginner-friendly personal finance management app designed for users t
 
 **Features:**
 
-* Check Balance: View your current balance.
+* Check Balance: View your current balance
 * Withdraw Funds: Withdraw a specified amount from your balance.
 * Deposit Funds: Add a specified amount to your balance.
 * Transaction History: Stores you last transactions
