@@ -2,7 +2,7 @@
 
 **Description:**
 
-Pefi is a beginner-friendly personal finance management app designed for users to log daily expenses and track their finances. It provides an intuitive interface for checking your balance, withdrawing funds, and making deposits.  The app also persists your data between sessions by saving it to a database.
+Pefi is a beginner-friendly personal finance management app designed for users to log daily expenses and track their finances. It provides an intuitive interface for checking your balance, withdrawing funds, and making deposits.  The app also persists your data between sessions by saving it to an sqlite database.
 
 **Features:**
 
